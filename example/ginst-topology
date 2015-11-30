@@ -1,0 +1,9 @@
+{
+  "default": "ginst",
+  "ginst": {
+    "app1": {
+    },
+    "app2": {
+    }
+  }
+}
