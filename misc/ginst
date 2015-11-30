@@ -1,0 +1,43 @@
+#!/bin/sh
+PM2=`which pm2`
+WORKING_DIR=/srv/ginst
+NAME=ginst
+DESC=ginst webhook and service
+
+PID=/run/ginst.pid
+
+start() {
+	$PM2 start $WORKING_DIR/app.js --name "ginst"
+}
+
+stop() {
+	$PM2 stop ginst
+}
+
+restart() {
+	$PM2 restart ginst
+}
+
+case "$1" in
+	start)
+		echo "Starting $DESC" "$NAME"
+		start
+		echo $?
+		;;
+	stop)
+		echo "Stopping $DESC" "$NAME"
+		stop
+		echo $?
+		;;
+	restart)
+		echo "Restarting $DESC" "$NAME"
+		restart
+		echo $?
+		;;
+	*)
+		echo "Usage: $NAME {start|stop|restart}" >&2
+		exit 1
+		;;
+esac
+
+exit 0
