@@ -18,7 +18,7 @@ function run_cmd(cmd, args, callback) {
 
   exec.stdout.on('data', function(data) { res += data; });
   exec.stderr.on('data', function(data) { res += data; });
-  exec.on('exit', function(code) { callback ('exec ' + cmd + '\n' + resp + '\ndone(' + code + ')') });
+  exec.on('exit', function(code) { callback ('exec ' + cmd + '\n' + res + '\ndone(' + code + ')') });
 }
 
 /********* webhook ************/
