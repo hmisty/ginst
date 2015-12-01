@@ -5,14 +5,14 @@ server {
   listen 80;
   listen [::]:80;
 
-  server_name ginst-app1.eri2.cn;
+  server_name ginst-app1-dev.eri2.cn ginst-app1-staging.eri2.cn ginst-app1.eri2.cn;
   access_log /var/log/ginst-app1.log;
 
   location / {
     gzip on;
     default_type text/plain;
     charset utf-8;
-    root /srv/dev/ginst/example/app1;
+    root /srv/ginst/example/app1;
     index index.html;
   }
 }
@@ -22,7 +22,7 @@ server {
   listen 80;
   listen [::]:80;
 
-  server_name ginst-app2.eri2.cn;
+  server_name ginst-app2-dev.eri2.cn ginst-app2-staging.eri2.cn ginst-app2.eri2.cn;
   access_log /var/log/ginst-app2.log;
 
   location / {
