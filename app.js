@@ -14,11 +14,15 @@ var GITHUB_WEBHOOK_SECRET = '123456';
 /*********** tool **************/
 function run_cmd(cmd, args, callback) {
   var exec = require('child_process').spawn(cmd, args);
-  var res = "";
+  var out = '';
 
-  exec.stdout.on('data', function(data) { res += data; });
-  exec.stderr.on('data', function(data) { res += data; });
-  exec.on('exit', function(code) { callback ('exec ' + cmd + '\n' + res + '\ndone(' + code + ')') });
+  exec.stdout.on('data', function(data) { out += data });
+  exec.stderr.on('data', function(data) { out += data });
+  exec.stdout.on('end', function() {
+    exec.stderr.on('end', function() {
+      callback('exec ' + cmd + '\n' + out + '\ndone');
+    });
+  });
 }
 
 /********* webhook ************/
