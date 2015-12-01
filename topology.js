@@ -5,7 +5,7 @@ module.exports = {
   /* dev fe */
   dev: [ 'ZLY-TEST' ],
   /* staging fe */
-  staging: [ 'ZLY-TEST' ],
+  staging: [  ],
   /* production fe */
   production: [ ],
 };
