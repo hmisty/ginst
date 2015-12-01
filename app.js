@@ -3,9 +3,39 @@
  */
 var express = require('express'),
     cookieParser = require('cookie-parser'),
+    webhookHandler = require('github-webhook-handler'),
     ejs = require('ejs'),
     http = require('http');
 
+/********* constants ************/
+var GITHUB_WEBHOOK_PATH = '/install';
+var GITHUB_WEBHOOK_SECRET = '123456';
+
+/*********** tool **************/
+function run_cmd(cmd, args, callback) {
+  var spawn = require('child_process').spawn;
+  var child = spawn(cmd, args);
+  var resp = "";
+
+  child.stdout.on('data', function(buffer) { resp += buffer.toString(); });
+  child.stdout.on('end', function() { callback (resp) });
+}
+
+/********* webhook ************/
+var handler = webhookHandler({ path: GITHUB_WEBHOOK_PATH, secret: GITHUB_WEBHOOK_SECRET });
+
+handler.on('error', function (err) {
+    console.error('Error:', err.message)
+});
+ 
+handler.on('push', function (event) {
+    console.log('Received a push event for %s to %s',
+          event.payload.repository.name,
+              event.payload.ref);
+      run_cmd('sh', ['./example/deploy-dev.sh'], function(text){ console.log(text) });
+});
+
+/******* web service **********/
 var app = express();
 
 app.set('views', './views');
@@ -19,6 +49,10 @@ app.get('/', function(req, res){
 });
 
 app.post('/install', function(req, res){
+  handler(req, res, function (err) {
+    res.statusCode = 404
+    res.end('no such location')
+  });
 });
 
 app.listen(8888);
