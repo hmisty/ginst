@@ -9,11 +9,11 @@ WEB_USERGROUP='evan'
 echo "Start deployment"
 cd $WEB_PATH
 echo "pulling source code..."
-git reset --hard origin/master
+git reset --hard origin/staging
 git clean -f
 # use no passphrase for your key! chagne it by ssh-keygen -p
-git pull
-git checkout master
+git pull origin staging
+git checkout staging
 echo "changing permissions..."
 chown -R $WEB_USER:$WEB_USERGROUP $WEB_PATH
 echo "Finished."

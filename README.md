@@ -26,10 +26,14 @@ git push to trigger deployment:
 
 create staging branch and push to remote:
 
- * git branch -a
  * git branch staging
  * git push origin staging
  * git branch -a
+
+pull to local:
+
+ * git pull origin staging
+ * git checkout staging
 
 ## pre-requisite
 
