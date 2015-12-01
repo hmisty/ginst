@@ -14,15 +14,8 @@ var GITHUB_WEBHOOK_SECRET = '123456';
 /*********** tool **************/
 function run_cmd(cmd, args, callback) {
   var exec = require('child_process').spawn(cmd, args);
-  var out = '';
-
-  exec.stdout.on('data', function(data) { out += data });
-  exec.stderr.on('data', function(data) { out += data });
-  exec.stdout.on('end', function() {
-    exec.stderr.on('end', function() {
-      callback('exec ' + cmd + '\n' + out + '\ndone');
-    });
-  });
+  exec.stdout.on('data', function(data) { callback(data.toString()) });
+  exec.stderr.on('data', function(data) { callback(data.toString()) });
 }
 
 /********* webhook ************/
