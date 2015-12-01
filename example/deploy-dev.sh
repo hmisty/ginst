@@ -1,6 +1,6 @@
 #!/bin/bash
 echo "to deploy dev"
-exit
+#exit
  
 WEB_PATH='/home/evan/git/ginst'
 WEB_USER='evan'
