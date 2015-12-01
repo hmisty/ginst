@@ -24,6 +24,13 @@ git push to trigger deployment:
 
  * git push --> github webhook -> POST ginst /install
 
+create staging branch and push to remote:
+
+ * git branch -a
+ * git branch staging
+ * git push origin staging
+ * git branch -a
+
 ## pre-requisite
 
  * setup git pull without pwd/passphrase
