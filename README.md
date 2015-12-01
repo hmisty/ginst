@@ -26,6 +26,7 @@ git push to trigger deployment:
 
 ## pre-requisite
 
+ * setup git pull without pwd/passphrase
  * deployment folder /srv/ginst
  * symlink /etc/nginx/sites-enabled/vhosts -> /srv/ginst/example/vhosts
 

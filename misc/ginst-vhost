@@ -4,10 +4,10 @@ server {
 	listen 80;
 	listen [::]:80;
 
-	server_name HOST_NAME1 HOST_NAME2;
+	server_name ginst.eri2.cn;
        
         # access log file
-        access_log /PATH/TO/GINST_HOST.log;
+        access_log /var/log/ginst.eri2.cn.log;
 		
 	location / {
                 proxy_pass http://127.0.0.1:8888;         
