@@ -13,12 +13,12 @@ var GITHUB_WEBHOOK_SECRET = '123456';
 
 /*********** tool **************/
 function run_cmd(cmd, args, callback) {
-  var spawn = require('child_process').spawn;
-  var child = spawn(cmd, args);
-  var resp = "";
+  var exec = require('child_process').spawn(cmd, args);
+  var res = "";
 
-  child.stdout.on('data', function(buffer) { resp += buffer.toString(); });
-  child.stdout.on('end', function() { callback (resp) });
+  exec.stdout.on('data', function(data) { res += data; });
+  exec.stderr.on('data', function(data) { res += data; });
+  exec.on('exit', function(code) { callback ('exec ' + cmd + '\n' + resp + '\ndone(' + code + ')') });
 }
 
 /********* webhook ************/
