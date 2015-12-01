@@ -1,5 +1,5 @@
 #!/bin/bash
-echo "to deploy dev"
+echo "to deploy staging"
 exit
  
 WEB_PATH='/home/evan/git/ginst'

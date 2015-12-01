@@ -7,6 +7,8 @@ var express = require('express'),
     ejs = require('ejs'),
     http = require('http');
 
+var topology = require('./topology.js');
+
 /********* constants ************/
 var GITHUB_WEBHOOK_PATH = '/install';
 var GITHUB_WEBHOOK_SECRET = '123456';
@@ -29,7 +31,18 @@ handler.on('push', function (event) {
     console.log('Received a push event for %s to %s',
           event.payload.repository.name,
               event.payload.ref);
-      run_cmd('sh', ['./example/deploy-dev.sh'], function(text){ console.log(text) });
+
+    var thishost = require('os').hostname();
+    var deploycmd = './example/deploy-dev.sh'; //to deploy dev by default
+    if (topology.staging.indexOf(thishost) != -1) {
+      deploycmd = './example/deploy-staging.sh';
+    }
+    if (topology.production.indexOf(thishost) != -1) {
+      deploycmd = './example/deploy-production.sh';
+    }
+    //if all contain thishost, to deploy production
+
+    run_cmd('sh', [deploycmd], function(text){ console.log(text) });
 });
 
 /******* web service **********/
